@@ -8,6 +8,7 @@ import { Badge } from '@consta/uikit/Badge';
 import { useNavigate, useParams } from 'react-router';
 import ErrorPage from '../error/ErrorPage';
 import SingleUserSkeleton from '@/shared/ui/SingleUserSceleton';
+import styles from './SingleUser.module.scss';
 
 const SingleUser = () => {
     const navigate = useNavigate();
@@ -24,9 +25,10 @@ const SingleUser = () => {
 
     return (
         <>
-            <Layout direction="column" style={{ padding: '20px 0', gap: '12px' }}>
+            <Layout direction="column" className={styles.container}>
                 <Layout>
                     <Button
+                        className={styles.backButton}
                         size="s"
                         iconLeft={IconArrowUndone}
                         view="clear"
@@ -35,7 +37,7 @@ const SingleUser = () => {
                     />
                 </Layout>
                 <Layout flex={1}>
-                    <User name={data?.name} info={data?.id} size="l" />
+                    <User name={data?.name} info={"id:"+data?.id} size="l" />
                 </Layout>
                 <Layout flex={1}>
                     <Badge
@@ -44,7 +46,7 @@ const SingleUser = () => {
                     />
                 </Layout>
                 <Layout flex={1} direction="column">
-                    <Layout flex={1} style={{ gap: '1em', alignItems: 'baseline' }}>
+                    <Layout flex={1} className={styles.infoRow}>
                         <Text size="l" as="p" weight="bold">
                             Email:
                         </Text>
@@ -52,7 +54,7 @@ const SingleUser = () => {
                             {data?.email}
                         </Text>
                     </Layout>
-                    <Layout flex={1} style={{ gap: '1em', alignItems: 'baseline' }}>
+                    <Layout flex={1} className={styles.infoRow}>
                         <Text size="l" as="p" weight="bold">
                             Gender:{' '}
                         </Text>

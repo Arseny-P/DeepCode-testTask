@@ -10,6 +10,7 @@ import { IconArrowUndone } from '@consta/icons/IconArrowUndone';
 import ErrorPage from '../error/ErrorPage';
 import SinglePostSkeleton from '@/shared/ui/SinglePostSceleton';
 import type { Comment } from '@/entities/post/post';
+import styles from './SinglePost.module.scss';
 
 const SinglePost = () => {
     const navigate = useNavigate();
@@ -24,7 +25,6 @@ const SinglePost = () => {
     const comments = post?.comments || [];
 
     const { data: author } = getSingleUser(postData?.user_id);
-
     if (isPostError) {
         return <ErrorPage />;
     }
@@ -34,9 +34,10 @@ const SinglePost = () => {
     }
     return (
         <>
-            <Layout direction="column">
+            <Layout direction="column" className={styles.container}>
                 <Layout>
                     <Button
+                        className={styles.backButton}
                         size="s"
                         iconLeft={IconArrowUndone}
                         view="clear"
@@ -44,14 +45,14 @@ const SinglePost = () => {
                         onClick={() => navigate('/')}
                     />
                 </Layout>
-                <Layout flex={2} direction="column">
+                <Layout direction="column">
                     <Text view="ghost" size="xs">
                         #{postData.id}
                     </Text>
                     <Heading size="3xl">{postData.title}</Heading>
-                    <Text size="s">Автор: {author?.name}</Text>
+                    <Text size="s">Автор: {author?.name || 'Неизвестен'}</Text>
                 </Layout>
-                <Layout flex={3}>
+                <Layout>
                     <Text size="m" lineHeight="m" as="p">
                         {postData.body}
                     </Text>
