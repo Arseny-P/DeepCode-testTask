@@ -39,11 +39,11 @@ const PostsTable = () => {
 
     return (
         <>
-            {isLoading || !rows ? (
+            {isLoading ? (
                 <TableSkeleton cols={columns.length} rows={perPage} />
             ) : (
                 <Table
-                    rows={rows}
+                    rows={rows || []}
                     columns={columns}
                     zebraStriped
                     stickyHeader

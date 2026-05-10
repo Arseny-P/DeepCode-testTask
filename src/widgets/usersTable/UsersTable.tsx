@@ -47,11 +47,11 @@ const UsersTable = () => {
 
     return (
         <>
-            {isLoading || !rows ? (
+            {isLoading ? (
                 <TableSkeleton cols={columns.length} rows={rows} />
             ) : (
                 <Table
-                    rows={rows}
+                    rows={rows || []}
                     columns={columns}
                     zebraStriped
                     stickyHeader
