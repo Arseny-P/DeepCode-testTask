@@ -1,7 +1,10 @@
 # Тестовое задание ДИП:КОД
 
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://deep-code-test-task-mx1e-8lvkvem0y-arseniys-projects-da85c874.vercel.app)
+
 ## Использованные технологии
 
+- Архитектура: FSD
 - React
 - TypeScript
 - UI-библиотека: Consta
@@ -44,3 +47,7 @@
     - Статус 
     - Email пользователя
     - Гендер
+
+## Как запустить?
+
+Результат можно увидеть на [Vercel](https://deep-code-test-task-mx1e-8lvkvem0y-arseniys-projects-da85c874.vercel.app)
