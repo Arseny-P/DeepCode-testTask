@@ -1,12 +1,12 @@
-import { api } from "../api";
-import { useQuery } from "@tanstack/react-query";
+import { api } from '../api';
+import { useQuery } from '@tanstack/react-query';
 
 export function getSingleUser(id: number) {
     return useQuery({
-        queryKey: ["user", id],
+        queryKey: ['user', id],
         queryFn: async () => {
-            const { data } = await api.get(`/users/${id}`)
+            const { data } = await api.get(`/users/${id}`);
             return data;
         },
-    })
+    });
 }

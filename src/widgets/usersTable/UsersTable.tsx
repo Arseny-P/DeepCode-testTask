@@ -7,50 +7,59 @@ import { ResponsesConnectionError } from '@consta/uikit/ResponsesConnectionError
 import { useNavigate, useSearchParams } from 'react-router';
 
 const UsersTable = () => {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const { perPage } = useAppStore();
-  const page = Number(searchParams.get('page')) || 1;
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const { perPage } = useAppStore();
+    const page = Number(searchParams.get('page')) || 1;
 
-  const {data: rows, isLoading, isError} = getUsers({page: page, perPage: perPage});
-  const columns: TableColumn<UserWithSurname>[] = [
-      {
-        title: 'ID',
-        accessor: 'id',
-      },
-      {
-        title: 'Имя',
-        accessor: 'name',
-      },
-      {
-        title: 'Фамилия',
-        accessor: 'surname',
-      },
-      {
-        title: 'Email',
-        accessor: 'email',
-      }
-  ];
-  if(isError) {
+    const { data: rows, isLoading, isError } = getUsers({ page: page, perPage: perPage });
+    const columns: TableColumn<UserWithSurname>[] = [
+        {
+            title: 'ID',
+            accessor: 'id',
+        },
+        {
+            title: 'Имя',
+            accessor: 'name',
+        },
+        {
+            title: 'Фамилия',
+            accessor: 'surname',
+        },
+        {
+            title: 'Email',
+            accessor: 'email',
+        },
+    ];
+    if (isError) {
+        return (
+            <ResponsesConnectionError
+                description="Произошла ошибка при загрузке данных. Проверьте токен и попробуйте еще раз"
+                actions={[]}
+            />
+        );
+    }
+
+    const handleRowClick = (row: UserWithSurname) => {
+        navigate(`/users/${row.id}`);
+    };
+
     return (
-        <ResponsesConnectionError description="Произошла ошибка при загрузке данных. Проверьте токен и попробуйте еще раз" actions={[]}/>
-    )
-  }
+        <>
+            {isLoading || !rows ? (
+                <TableSkeleton cols={columns.length} rows={rows} />
+            ) : (
+                <Table
+                    rows={rows}
+                    columns={columns}
+                    zebraStriped
+                    stickyHeader
+                    rowHoverEffect={true}
+                    onRowClick={handleRowClick}
+                />
+            )}
+        </>
+    );
+};
 
-  const handleRowClick = (row: UserWithSurname) => {
-      navigate(`/users/${row.id}`);
-  };
-
-
-  return (
-    <>
-        {isLoading || !rows
-            ? <TableSkeleton cols={columns.length} rows={rows} />
-            : <Table rows={rows} columns={columns} zebraStriped stickyHeader rowHoverEffect={true} onRowClick={handleRowClick}/>
-        }
-    </>
-    
-  )
-}
-
-export default UsersTable
+export default UsersTable;

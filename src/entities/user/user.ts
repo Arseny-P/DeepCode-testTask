@@ -8,4 +8,4 @@ export type User = {
 
 export type UserWithSurname = User & {
     surname: string;
-}
+};
