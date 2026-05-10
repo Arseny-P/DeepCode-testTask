@@ -31,7 +31,7 @@ export const useAppStore = create<AppState>()(
       storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
         if (state?.token) {
-          api.defaults.headers.Authorization = `Bearer ${state.token}`;
+          api.defaults.headers.common.Authorization = `Bearer ${state.token}`;
         }
       },
     }
