@@ -10,6 +10,7 @@ import PostsTable from '@/widgets/postsTable/PostsTable';
 import { useAppStore } from '@/shared/appStore/useAppStore';
 import { useSearchParams } from 'react-router';
 import Heading from '@/shared/ui/Heading';
+import styles from './MainPage.module.scss';
 
 const MainPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -62,12 +63,12 @@ const MainPage = () => {
     ];
     // убрать инлайн стили
     return (
-        <>
-            <Layout direction="column" style={{ padding: '20px' }}>
-                <Heading view="brand" size="3xl" style={{ textAlign: 'center' }}>
+        <div>
+            <Layout direction="column" className={styles.page}>
+                <Heading view="brand" size="3xl" className={styles.title}>
                     ДИП : КОД
                 </Heading>
-                <Layout direction="column" flex={1} style={{ gap: '20px' }}>
+                <Layout direction="column" flex={1} className={styles.controls}>
                     <TextField
                         label="Введите Ваш Access token"
                         value={localToken}
@@ -91,7 +92,7 @@ const MainPage = () => {
                     </Layout>
                     <Layout flex={1}>
                         <Select
-                            style={{ zIndex: 100, width: 'auto' }}
+                            className={styles.select}
                             value={selectItems.find((item) => item.label === perPage)}
                             onChange={(value: { label: number; id: number } | null) =>
                                 value?.label && setPerPage(value.label)
@@ -104,10 +105,10 @@ const MainPage = () => {
                         />
                     </Layout>
                 </Layout>
-                <Layout flex={1}>
+                <Layout flex={1} className={styles.tableContainer}>
                     {activeTab === 'Пользователи' ? <UsersTable /> : <PostsTable />}
                 </Layout>
-                <Layout direction="column" flex={1}>
+                <Layout flex={1} className={styles.pagination}>
                     <Pagination
                         items={totalPages}
                         value={page}
@@ -119,7 +120,7 @@ const MainPage = () => {
                     />
                 </Layout>
             </Layout>
-        </>
+        </div>
     );
 };
 
