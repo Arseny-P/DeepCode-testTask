@@ -65,9 +65,11 @@ const MainPage = () => {
     return (
         <div>
             <Layout direction="column" className={styles.page}>
-                <Heading view="brand" size="3xl" className={styles.title}>
-                    ДИП : КОД
-                </Heading>
+                <div className={styles.title}>
+                    <Heading view="brand" size="3xl">
+                        ДИП : КОД
+                    </Heading>
+                </div>
                 <Layout direction="column" flex={1} className={styles.controls}>
                     <TextField
                         label="Введите Ваш Access token"
