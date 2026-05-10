@@ -5,7 +5,7 @@ export type Post = {
     body: string
 }
 
-type Comment = {
+export type Comment = {
     id: number,
     post_id: number,
     name: string,

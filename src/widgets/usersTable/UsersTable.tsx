@@ -31,7 +31,7 @@ const UsersTable = () => {
         accessor: 'email',
       }
   ];
-  if(isError || !rows) {
+  if(isError) {
     return (
         <ResponsesConnectionError description="Произошла ошибка при загрузке данных. Проверьте токен и попробуйте еще раз" actions={[]}/>
     )
@@ -44,7 +44,7 @@ const UsersTable = () => {
 
   return (
     <>
-        {isLoading
+        {isLoading || !rows
             ? <TableSkeleton cols={columns.length} rows={rows} />
             : <Table rows={rows} columns={columns} zebraStriped stickyHeader rowHoverEffect={true} onRowClick={handleRowClick}/>
         }

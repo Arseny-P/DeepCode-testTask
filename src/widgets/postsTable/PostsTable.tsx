@@ -23,7 +23,7 @@ const PostsTable = () => {
         accessor: 'title',
       }
   ];
-  if(isError || !rows) {
+  if(isError) {
     return (
         <ResponsesConnectionError description="Произошла ошибка при загрузке данных. Проверьте токен и попробуйте еще раз" actions={[]}/>
     )
@@ -35,7 +35,7 @@ const PostsTable = () => {
 
   return (
     <>
-        {isLoading
+        {isLoading || !rows
             ? <TableSkeleton cols={columns.length} rows={perPage} />
             : <Table rows={rows} columns={columns} zebraStriped stickyHeader rowHoverEffect={true} onRowClick={handleRowClick}/>
         }

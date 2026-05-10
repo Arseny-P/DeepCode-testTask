@@ -27,13 +27,13 @@ const MainPage = () => {
   const [localToken, setLocalToken] = useState(token);
   const [tokenStatus, setStatus] = useState<"warning" | undefined>(undefined);
 
-  const pageChange = (page: number) => [
-    setSearchParams({ page: page.toString() }),
-  ]
+  const pageChange = (page: number) => {
+    setSearchParams({tab: activeTab || tabs[0], page: page.toString() });
+  }
   const tabChange = (tab: string) => {
     setSearchParams({ tab, page: '1' });
   };
-  const changeGLobalToken = useCallback(
+  const changeGlobalToken = useCallback(
     debounce((value: string) => {
         setToken(value);
     }, 200),
@@ -49,7 +49,7 @@ const MainPage = () => {
     setLocalToken(newValue);
     if (newValue) {
       setStatus(undefined);
-      changeGLobalToken(newValue);
+      changeGlobalToken(newValue);
     } else {
       setStatus("warning");
     }
@@ -60,6 +60,7 @@ const MainPage = () => {
   return (
     <>
         <Layout direction='column' style={{padding: '20px'}}>
+            <Heading view="brand" size='3xl' style={{textAlign: 'center'}}>ДИП : КОД</Heading>
             <Layout direction='column' flex={1} style={{ gap: '20px' }}>
                 <TextField label='Введите Ваш Access token' value={localToken} onChange={handleChange} status={tokenStatus} caption={tokenStatus ? "Обязательное поле" : undefined} type="text" placeholder='Access token' withClearButton />
                 <Layout flex={1}>
