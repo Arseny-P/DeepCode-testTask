@@ -15,5 +15,6 @@ export function getPosts({ page = 1, perPage = 10 }: { page: number; perPage: nu
 
             return data;
         },
+        enabled: !!token,
     });
 }

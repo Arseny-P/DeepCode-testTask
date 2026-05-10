@@ -3,7 +3,7 @@ import { getPosts } from '@/shared/api/hooks/getPosts';
 import { useAppStore } from '@/shared/appStore/useAppStore';
 import TableSkeleton from '@/shared/ui/TableSkeleton';
 import { Table, type TableColumn } from '@consta/table/Table';
-import { ResponsesConnectionError } from '@consta/uikit/ResponsesConnectionError';
+import { ResponsesEmptyBox } from '@consta/uikit/ResponsesEmptyBox';
 import { useNavigate, useSearchParams } from 'react-router';
 
 const PostsTable = () => {
@@ -25,8 +25,9 @@ const PostsTable = () => {
     ];
     if (isError) {
         return (
-            <ResponsesConnectionError
-                description="Произошла ошибка при загрузке данных. Проверьте токен и попробуйте еще раз"
+            <ResponsesEmptyBox
+                title="Произошла ошибка при загрузке данных"
+                description="Проверьте токен и попробуйте еще раз"
                 actions={[]}
             />
         );

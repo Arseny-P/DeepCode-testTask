@@ -19,5 +19,6 @@ export function getUsers({ page = 1, perPage = 10 }: { page: number; perPage: nu
                 return { ...u, name, surname };
             });
         },
+        enabled: !!token,
     });
 }
